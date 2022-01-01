@@ -8,17 +8,22 @@ import cv2
 
 
 
+
 def main():
     st.title("FindMe")
     
     st.write('''
-    #**Find look-alike objects from a big picture**
+    *Find look-alike objects from a big picture*
     ''')
 
-    image_src = st.file_uploader("Choose an image...", type='png')
-    img_rgb = Image.open(image_src)
-    template_src = st.file_uploader("Choose an image...", type='png')
-    template = Image.open(template_src)
+    image_src = st.file_uploader("Big picture", type='png')
+    if image_src is not None:
+        img_rgb = Image.open(image_src)
+        st.image(img_rgb, caption='Uploaded Image.', use_column_width=True)
+        template_src = st.file_uploader("What to find", type='png')
+        if template_src is not None:
+            template = Image.open(template_src)
+            st.image(template, caption='Uploaded Image.', use_column_width=False)
     
     try:
         img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
