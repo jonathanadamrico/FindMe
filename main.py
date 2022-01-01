@@ -16,12 +16,14 @@ def main():
     ***
     ''')
 
+    st.write("### Step 1")
     image_src = st.file_uploader("Upload the big picture where we need to find the objects", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
         st.write("***")
         
+        st.write("### Step 2")
         template_src = st.file_uploader("Upload a template that looks similar to the objects that we need to find", type='png')
         if template_src is not None:
             template = Image.open(template_src)
@@ -33,6 +35,7 @@ def main():
             height, width = template.shape[::]
             st.write("***")
     
+            st.write("### Step 3")
             threshold = st.slider('Select a value for the threshold', 0.0, 1.0, 0.5)
     
             st.write(f"Finding objects at {threshold} similarity threshold...")
@@ -51,9 +54,10 @@ def main():
             st.image(img_gray, caption='Objects found', use_column_width=True)
 
             st.write("***")
-            st.write('''As you can see, the results may not be very accurate especially when the objects of interest are of different sizes.
-            There is still a lot of work to be done but I hope this was somehow helpful. You may visit the [github source page](https://github.com/jonathanadamrico/FindMe) 
-            for the codes and references. 
+            st.write('''The results may not be very accurate when the objects of interest are of different sizes.
+            There is still a lot of work to be done but I hope this was helpful to you.
+            You may visit the [github page](https://github.com/jonathanadamrico/FindMe) 
+            for the source codes, documentations, and references. 
         
             ''')
             st.write("### Thank you!")
@@ -64,6 +68,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-# References:
-#https://scikit-image.org/docs/dev/auto_examples/features_detection/plot_template.html#sphx-glr-auto-examples-features-detection-plot-template-py
+# Reference:
 #https://towardsdatascience.com/object-detection-on-python-using-template-matching-ab4243a0ca62
