@@ -3,9 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from skimage import data
-import cv2
 from PIL import Image
-from tempfile import NamedTemporaryFile
+import cv2
 
 
 
