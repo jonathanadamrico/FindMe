@@ -16,13 +16,13 @@ def main():
     ***
     ''')
 
-    image_src = st.file_uploader("Upload the big picture where we will find objects that are look alikes of the template object", type='png')
+    image_src = st.file_uploader("Upload the big picture where we will find objects that look similar to a template object", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
         st.write("***")
         
-        template_src = st.file_uploader("Object to find", type='png')
+        template_src = st.file_uploader("Upload the template object that we will to find", type='png')
         if template_src is not None:
             template = Image.open(template_src)
             
@@ -33,7 +33,7 @@ def main():
             height, width = template.shape[::]
             st.write("***")
     
-            threshold = st.slider('Threshold', 0, 1, 0.5)
+            threshold = st.slider('Select a threshold', 0.0, 1.0, 0.5)
     
             st.write(f"Finding objects at {threshold} similarity threshold...")
     
