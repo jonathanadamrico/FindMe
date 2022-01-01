@@ -18,17 +18,15 @@ def main():
 
     image_src = st.file_uploader("Big picture", type='png')
     if image_src is not None:
-        #img_rgb = Image.open(image_src)
-        img_rgb = cv2.imread(image_src)
+        img_rgb = Image.open(image_src)
         template_src = st.file_uploader("Object to find", type='png')
         
         if template_src is not None:
-            #template = Image.open(template_src)
-            template = cv2.imread(template_src, 0)
+            template = Image.open(template_src)
             
             try:
-                img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
-                template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+                img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
+                template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
             except:
                 img_gray = data.coins()
                 template = img_gray[170:220, 75:130]
