@@ -36,16 +36,15 @@ def main():
     
             st.write("Finding objects...")
     
-            result = cv2.matchTemplate(img_gray, template, cv2.TM_SQDIFF)
-            plt.imshow(result, cmap='gray')
+            result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
             threshold = 0.5 #For TM_CCOEFF_NORMED, larger values = good fit.
 
             loc = np.where( result >= threshold)  
 
-            for pt in zip(*loc[::-1]): 
+            for pt in zip(loc[::-1]): 
                 cv2.rectangle(img_gray, pt, (pt[0] + width, pt[1] + height), (255, 0, 0), 1)
-            plt.imshow(img_gray)
+            st.image(img_gray, caption='Objects found', use_column_width=True)
 
 
     
