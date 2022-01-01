@@ -7,8 +7,6 @@ from PIL import Image
 import cv2
 
 
-
-
 def main():
     st.title("FindMe")
     
@@ -18,14 +16,15 @@ def main():
 
     image_src = st.file_uploader("Big picture", type='png')
     if image_src is not None:
-        img_rgb = Image.open(image_src)
+        img_rgb = np.array(Image.open(image_src))
         template_src = st.file_uploader("Object to find", type='png')
+        st.image(img_rgb, caption='Big Picture', use_column_width=True)
         
         if template_src is not None:
-            template = Image.open(template_src)
+            template = np.array(Image.open(template_src))
             
-            img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
-            template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
+            img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
+            template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
 
             st.image(template, caption='Object to Find', use_column_width=False)
             height, width = template.shape[::]
