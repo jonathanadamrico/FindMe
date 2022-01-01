@@ -12,15 +12,17 @@ def main():
     
     st.write('''
     *Find look-alike objects from a big picture*
+    
+    ***
     ''')
 
     image_src = st.file_uploader("Big picture", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
-        template_src = st.file_uploader("Object to find", type='png')
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
         st.write("***")
         
+        template_src = st.file_uploader("Object to find", type='png')
         if template_src is not None:
             template = Image.open(template_src)
             
@@ -35,7 +37,7 @@ def main():
     
             result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
-            threshold = 0.8 #For TM_CCOEFF_NORMED, larger values = good fit.
+            threshold = 0.9 #For TM_CCOEFF_NORMED, larger values = good fit.
 
             loc = np.where( result >= threshold)  
 
