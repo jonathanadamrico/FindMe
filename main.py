@@ -51,12 +51,12 @@ def main():
             st.image(img_gray, caption='Objects found', use_column_width=True)
 
             st.write("***")
-            st.write('''As you can see, the results may not be accurate especially when the objects of interest are of different sizes.
-            There is still a lot of work to be done but I hope this was somehow helpful. You may visit the github source page https://github.com/jonathanadamrico/FindMe 
+            st.write('''As you can see, the results may not be very accurate especially when the objects of interest are of different sizes.
+            There is still a lot of work to be done but I hope this was somehow helpful. You may visit the [github source page](https://github.com/jonathanadamrico/FindMe) 
             for the codes and references. 
-            
-            ### Thank you!
+        
             ''')
+            st.write("### Thank you!")
 
     
     
