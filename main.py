@@ -16,7 +16,7 @@ def main():
     ***
     ''')
 
-    image_src = st.file_uploader("Big picture", type='png')
+    image_src = st.file_uploader("Upload the big picture where we will find objects that are look alikes of the template object", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
@@ -33,11 +33,11 @@ def main():
             height, width = template.shape[::]
             st.write("***")
     
-            st.write("Finding objects...")
+            threshold = st.slider('Threshold', 0, 1, 0.5)
+    
+            st.write(f"Finding objects at {threshold} similarity threshold...")
     
             result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
-
-            threshold = 0.9 #For TM_CCOEFF_NORMED, larger values = good fit.
 
             loc = np.where( result >= threshold)  
 
