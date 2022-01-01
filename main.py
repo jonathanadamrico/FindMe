@@ -16,24 +16,24 @@ def main():
     ***
     ''')
 
-    image_src = st.file_uploader("Upload the big picture where we will find objects that look similar to a template object", type='png')
+    image_src = st.file_uploader("Upload the big picture where we need to find the objects", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
         st.write("***")
         
-        template_src = st.file_uploader("Upload the template object that we will to find", type='png')
+        template_src = st.file_uploader("Upload a template that looks similar to the objects that we need to find", type='png')
         if template_src is not None:
             template = Image.open(template_src)
             
             img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
             template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
 
-            st.image(template, caption='Object to Find', use_column_width=False)
+            st.image(template, caption='Template Object', use_column_width=False)
             height, width = template.shape[::]
             st.write("***")
     
-            threshold = st.slider('Select a threshold', 0.0, 1.0, 0.5)
+            threshold = st.slider('Select a value for the threshold', 0.0, 1.0, 0.5)
     
             st.write(f"Finding objects at {threshold} similarity threshold...")
     
@@ -47,10 +47,17 @@ def main():
                 cv2.rectangle(img_gray, top_left, bottom_right, (0, 255, 0), 1)
                 
             st.write("***")
-            st.write("### Results")
+            st.write("### Result")
             st.image(img_gray, caption='Objects found', use_column_width=True)
 
-            st.write("### Thank you!")
+            st.write("***")
+            st.write('''As you can see, the results may not be accurate especially when the objects of interest are of different sizes.
+            There is still a lot of work to be done but I hope this was somehow helpful. You may visit the github source page https://github.com/jonathanadamrico/FindMe 
+            for the codes and references. 
+            
+            ### Thank you!
+            ''')
+
     
     
 
