@@ -24,14 +24,9 @@ def main():
         if template_src is not None:
             template = Image.open(template_src)
             
-            try:
-                img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
-                template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
-            except:
-                img_gray = data.coins()
-                template = img_gray[170:220, 75:130]
+            img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
+            template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
 
-            st.image(img_gray, caption='Big Picture', use_column_width=True)
             st.image(template, caption='Object to Find', use_column_width=False)
             height, width = template.shape[::]
     
@@ -39,13 +34,13 @@ def main():
     
             result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
-            threshold = 0.5 #For TM_CCOEFF_NORMED, larger values = good fit.
+            threshold = 0.8 #For TM_CCOEFF_NORMED, larger values = good fit.
 
             loc = np.where( result >= threshold)  
 
             for pt in zip(*loc[::-1]): 
-                cv2.rectangle(img_gray, pt, (pt[0] + width, pt[1] + height), (255, 0, 0), 1)
-            st.image(img_gray, caption='Objects found', use_column_width=True)
+                cv2.rectangle(img_rgb, pt, (pt[0] + width, pt[1] + height), (0, 255, 0), 1)
+            st.image(img_rgb, caption='Objects found', use_column_width=True)
 
 
     
