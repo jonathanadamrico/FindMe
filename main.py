@@ -25,25 +25,25 @@ def main():
             template = Image.open(template_src)
             st.image(template, caption='Uploaded Image.', use_column_width=False)
     
-    try:
-        img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
-        template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-    except:
-        img_gray = data.coins()
-        template = img_gray[170:220, 75:130]
+            try:
+                img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
+                template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+            except:
+                img_gray = data.coins()
+                template = img_gray[170:220, 75:130]
 
-    height, width = template.shape[::]
+            height, width = template.shape[::]
     
-    result = cv2.matchTemplate(img_gray, template, cv2.TM_SQDIFF)
-    plt.imshow(result, cmap='gray')
+            result = cv2.matchTemplate(img_gray, template, cv2.TM_SQDIFF)
+            plt.imshow(result, cmap='gray')
 
-    threshold = 0.5 #For TM_CCOEFF_NORMED, larger values = good fit.
+            threshold = 0.5 #For TM_CCOEFF_NORMED, larger values = good fit.
 
-    loc = np.where( result >= threshold)  
+            loc = np.where( result >= threshold)  
 
-    for pt in zip(loc[::-1]): 
-        cv2.rectangle(img_gray, pt, (pt[0] + width, pt[1] + height), (255, 0, 0), 1)
-    plt.imshow(img_gray)
+            for pt in zip(loc[::-1]): 
+                cv2.rectangle(img_gray, pt, (pt[0] + width, pt[1] + height), (255, 0, 0), 1)
+            plt.imshow(img_gray)
 
 
     
