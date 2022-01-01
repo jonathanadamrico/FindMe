@@ -19,12 +19,11 @@ def main():
     image_src = st.file_uploader("Big picture", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
-        st.image(img_rgb, caption='Big Picture', use_column_width=True)
         template_src = st.file_uploader("Object to find", type='png')
+        
         if template_src is not None:
             template = Image.open(template_src)
-            st.image(template, caption='Object to Find', use_column_width=False)
-    
+            
             try:
                 img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
                 template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
@@ -32,6 +31,8 @@ def main():
                 img_gray = data.coins()
                 template = img_gray[170:220, 75:130]
 
+            st.image(img_rgb, caption='Big Picture', use_column_width=True)
+            st.image(template, caption='Object to Find', use_column_width=False)
             height, width = template.shape[::]
     
             st.write("Finding objects...")
