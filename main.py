@@ -33,14 +33,17 @@ def main():
     result = cv2.matchTemplate(img_gray, template, cv2.TM_SQDIFF)
     plt.imshow(result, cmap='gray')
 
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    threshold = 0.5 #For TM_CCOEFF_NORMED, larger values = good fit.
 
-    top_left = min_loc  #Change to max_loc for all except for TM_SQDIFF
-    bottom_right = (top_left[0] + width, top_left[1] + height)
-    cv2.rectangle(img_gray, top_left, bottom_right, (0, 255, 0), 2) 
+    loc = np.where( res >= threshold)  
+
+    for pt in zip(loc[::-1]): 
+        cv2.rectangle(img_gray, pt, (pt[0] + width, pt[1] + height), (255, 0, 0), 1)
     plt.imshow(img_gray)
 
 
+    
+    
 
 if __name__ == "__main__":
     main()
