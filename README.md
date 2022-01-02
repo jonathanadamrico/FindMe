@@ -12,15 +12,21 @@ The application currently works best on grayscale images and unrotated objects.
 
 Upload the big picture where we need to find the hidden objects
 
+![Big Picture](/input/ShakeBreak_image.png)
+
 ### Step 2
 
 Upload an image that looks similar to the hidden objects
+
+![Hidden Object](/input/ShakeBreak_template2.png)
 
 ### Step 3
 
 Select a value for the threshold
 
 ***
+
+![Object(s) Found](/input/ShakeBreak_result.png)
 
 The results may not be very accurate when the hidden objects are of different sizes, colors, backgrounds, and rotations compared to the template image.
 This application was deployed to this [webpage](https://share.streamlit.io/jonathanadamrico/findme/main/main.py).
