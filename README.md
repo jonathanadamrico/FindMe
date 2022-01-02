@@ -4,7 +4,7 @@
 
 The application currently works best on grayscale images and unrotated objects.
 
-![Sample Image](/input/Shake Break.png)
+![Sample Image](/input/ShakeBreak.png)
 
 ***
 
