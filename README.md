@@ -33,6 +33,6 @@ Select a value for the threshold
 ![Object(s) Found](/input/ShakeBreak_result.png)
 
 The results may not be very accurate when the hidden objects are of different sizes, colors, backgrounds, and rotations compared to the template image.
-This application was deployed to this [webpage](https://share.streamlit.io/jonathanadamrico/findme/main/main.py).
+This application was deployed in [FindMe](https://share.streamlit.io/jonathanadamrico/findme/main/main.py) hosted by Streamlit.
 
 ### Thank you!
