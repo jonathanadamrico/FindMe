@@ -11,10 +11,13 @@ def main():
     st.title("FindMe")
     
     st.write('''
-    *Find look-alike objects from a big picture*
-    
-    ***
+    *Find hidden objects from a big crowded picture*
+    The application currently works best on grayscale images and unrotated objects.
     ''')
+    
+    sample_image = Image.open('/input/Shake Break.png')
+    st.image(sample_image, caption='Sample Image', use_column_widht=False)
+    st.write("***")
 
     st.write("### Step 1")
     image_src = st.file_uploader("Upload the big picture where we need to find the objects", type='png')
@@ -54,10 +57,9 @@ def main():
             st.image(img_gray, caption='Objects found', use_column_width=True)
 
             st.write("***")
-            st.write('''The results may not be very accurate when the objects of interest are of different sizes.
-            There is still a lot of work to be done but I hope this was helpful to you.
-            You may visit the [github page](https://github.com/jonathanadamrico/FindMe) 
-            for the source codes, documentations, and references. 
+            st.write('''The results may not be very accurate when the objects of interest are of different sizes, colors, backgrounds,
+            and rotations compared to the template image.
+            You may visit the [github page](https://github.com/jonathanadamrico/FindMe) for the source codes, documentations, and references. 
         
             ''')
             st.write("### Thank you!")
