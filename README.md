@@ -39,6 +39,14 @@ This application was deployed at [FindMe](https://share.streamlit.io/jonathanada
 
 
 
+
+
+***
+
+
+
+
+
 # Acknowledgments
 
 * Object Detection on Python using Template Matching [blog](https://towardsdatascience.com/object-detection-on-python-using-template-matching-ab4243a0ca62) by Ravindu Senaratne 
