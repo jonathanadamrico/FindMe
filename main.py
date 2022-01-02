@@ -50,7 +50,7 @@ def main():
             result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
             loc = np.where( result >= threshold)  
-            find_count = len(loc)
+            find_count = len(loc[0])
 
             for pt in zip(*loc[::-1]): 
                 top_left = pt
