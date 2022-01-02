@@ -12,29 +12,30 @@ def main():
     
     st.write('''
     *Find hidden objects from a big crowded picture*
+    
     The application currently works best on grayscale images and unrotated objects.
     ''')
     
     sample_image = Image.open('input/Shake Break.png')
-    st.image(sample_image, caption='Sample Image', use_column_width=False)
+    st.image(sample_image, caption='Sample Image', use_column_width=True)
     st.write("***")
 
     st.write("### Step 1")
-    image_src = st.file_uploader("Upload the big picture where we need to find the objects", type='png')
+    image_src = st.file_uploader("Upload the big picture where we need to find the hidden objects", type='png')
     if image_src is not None:
         img_rgb = Image.open(image_src)
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
         st.write("***")
         
         st.write("### Step 2")
-        template_src = st.file_uploader("Upload a template that looks similar to the objects that we need to find", type='png')
+        template_src = st.file_uploader("Upload an image that looks similar to the hidden objects", type='png')
         if template_src is not None:
             template = Image.open(template_src)
             
             img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
             template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
 
-            st.image(template, caption='Template Object', use_column_width=False)
+            st.image(template, caption='Hidden Object', use_column_width=False)
             height, width = template.shape[::]
             st.write("***")
     
@@ -57,7 +58,7 @@ def main():
             st.image(img_gray, caption='Objects found', use_column_width=True)
 
             st.write("***")
-            st.write('''The results may not be very accurate when the objects of interest are of different sizes, colors, backgrounds,
+            st.write('''The results may not be very accurate when the hidden objects are of different sizes, colors, backgrounds,
             and rotations compared to the template image.
             You may visit the [github page](https://github.com/jonathanadamrico/FindMe) for the source codes, documentations, and references. 
         
