@@ -16,7 +16,7 @@ def main():
     ''')
     
     sample_image = Image.open('input/Shake Break.png')
-    st.image(sample_image, caption='Sample Image', use_column_widht=False)
+    st.image(sample_image, caption='Sample Image', use_column_width=False)
     st.write("***")
 
     st.write("### Step 1")
