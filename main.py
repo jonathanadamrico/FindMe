@@ -8,6 +8,8 @@ import cv2
 
 
 def main():
+    st.set_page_config(page_title='FindMe')
+    
     st.title("FindMe")
     
     st.write('''
