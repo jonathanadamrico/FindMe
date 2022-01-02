@@ -13,12 +13,13 @@ def main():
     st.title("FindMe")
     
     st.write('''
-    *Find hidden objects from a big crowded picture*
-    
-    The application currently works best on grayscale images and unrotated objects.
+    **Hidden Object Finder**
+
+    Finds hidden objects in a big crowded picture based on a template object.
+    Note that the application currently works best on grayscale images and unrotated objects.
     ''')
     
-    sample_image = Image.open('input/Shake Break.png')
+    sample_image = Image.open('input/ShakeBreak.png')
     st.image(sample_image, caption='Sample Image', use_column_width=True)
     st.write("***")
 
@@ -49,6 +50,7 @@ def main():
             result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
             loc = np.where( result >= threshold)  
+            find_count = len(loc)
 
             for pt in zip(*loc[::-1]): 
                 top_left = pt
@@ -57,7 +59,10 @@ def main():
                 
             st.write("***")
             st.write("### Result")
-            st.image(img_gray, caption='Objects found', use_column_width=True)
+            st.image(img_gray, caption=f'{find_count} object(s) found', use_column_width=True)
+
+            if find_count == 0:
+                st.write("Try decreasing the threshold to find more objects ")
 
             st.write("***")
             st.write('''The results may not be very accurate when the hidden objects are of different sizes, colors, backgrounds,
