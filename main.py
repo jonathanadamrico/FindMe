@@ -66,7 +66,9 @@ def main():
             if find_count == 0:
                 st.warning("No objects were found. Try decreasing the threshold to find objects.")
                 if threshold == 0:
-                    st.info("Unfortunately, the algorithm is not good enough to find the hidden object(s).")
+                    st.warning("Unfortunately, the algorithm is not good enough to find the hidden object(s).")
+            elif find_count > 100:
+                st.warning("You may try increasing the threshold to avoid too many false positives.")
             else:
                 st.success("Object(s) found!")
                 
