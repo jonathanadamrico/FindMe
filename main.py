@@ -59,10 +59,10 @@ def main():
                 
             st.write("***")
             st.write("### Result")
-            st.image(img_gray, caption=f'{find_count} object(s) found', use_column_width=True)
+            st.image(img_gray, caption=f'Object(s) found', use_column_width=True)
 
             if find_count == 0:
-                st.write("Try decreasing the threshold to find more objects ")
+                st.write("**No Objects Found**. Try decreasing the threshold to find more objects. ")
 
             st.write("***")
             st.write('''The results may not be very accurate when the hidden objects are of different sizes, colors, backgrounds,
