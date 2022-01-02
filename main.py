@@ -15,7 +15,7 @@ def main():
     The application currently works best on grayscale images and unrotated objects.
     ''')
     
-    sample_image = Image.open('/input/Shake Break.png')
+    sample_image = Image.open('input/Shake Break.png')
     st.image(sample_image, caption='Sample Image', use_column_widht=False)
     st.write("***")
 
