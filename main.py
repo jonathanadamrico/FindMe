@@ -16,7 +16,7 @@ def main():
     **Hidden Object Finder**
 
     Finds hidden objects in a big crowded picture based on a template object.
-    Note that the application currently works best on grayscale images and unrotated objects.
+    Note that the application uses opencv-python's matchTemplate module and currently works best on grayscale images and unrotated objects.
     ''')
     
     sample_image = Image.open('input/ShakeBreak.png')
@@ -51,6 +51,9 @@ def main():
 
             loc = np.where( result >= threshold)  
             find_count = len(loc[0])
+
+            # We want a colored rectangle on top of the gray image 
+            img_gray = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
 
             for pt in zip(*loc[::-1]): 
                 top_left = pt
