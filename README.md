@@ -1,6 +1,7 @@
 # FindMe
+*Hidden object finder*
 
-*Find hidden objects from a big crowded picture*
+Finds hidden objects in a big crowded picture based on a template object.
 
 The application currently works best on grayscale images and unrotated objects.
 
@@ -23,6 +24,8 @@ Upload an image that looks similar to the hidden objects
 ### Step 3
 
 Select a value for the threshold
+
+![Threshold](/input/Threshold.png)
 
 ***
 
