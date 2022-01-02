@@ -2,7 +2,7 @@
 **Hidden Object Finder**
 
 Finds hidden objects in a big crowded picture based on a template object.
-Note that the application currently works best on grayscale images and unrotated objects.
+Note that the application uses opencv-python's matchTemplate module and currently works best on grayscale images and unrotated objects.
 
 ![Sample Image](/input/ShakeBreak.png)
 
