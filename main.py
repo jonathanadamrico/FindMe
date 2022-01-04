@@ -2,9 +2,15 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-from skimage import data
 from PIL import Image
 import cv2
+
+
+def rotate_image(image, angle):
+  image_center = tuple(np.array(image.shape[1::-1]) / 2)
+  rot_mat = cv2.getRotationMatrix2D(image_center, angle, 1.0)
+  result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
+  return result
 
 
 def main():
@@ -46,10 +52,18 @@ def main():
             threshold = st.slider('Select a value for the threshold', 0.0, 1.0, 0.5)
     
             st.write(f"Finding objects at {threshold} similarity threshold...")
-    
-            result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
 
-            loc = np.where( result >= threshold)  
+            # Find rotated hidden objects
+            loc0 = []
+            loc1 = []
+            for rotation_angle in range(0,360):  
+                template = rotate_image(template, rotation_angle)
+                result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED) 
+                loc = np.where(result >= threshold)
+                loc0.extend(loc[0].tolist())
+                loc1.extend(loc[1].tolist())
+    
+            loc = [np.array(loc0), np.array(loc1)] 
             find_count = len(loc[0])
 
             # We want a colored rectangle on top of the gray image 
@@ -92,3 +106,4 @@ if __name__ == "__main__":
 
 # Reference:
 #https://towardsdatascience.com/object-detection-on-python-using-template-matching-ab4243a0ca62
+#https://stackoverflow.com/questions/9041681/opencv-python-rotate-image-by-x-degrees-around-specific-point
