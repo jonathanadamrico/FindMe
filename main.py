@@ -30,20 +30,19 @@ def main():
     st.write("***")
 
     st.write("### Step 1")
-    image_src = st.file_uploader("Upload the big picture where we need to find the hidden objects", type='png')
+    image_src = st.file_uploader("Upload the big picture where we need to find the hidden objects", type=['png','jpg','jpeg'])
     if image_src is not None:
         img_rgb = Image.open(image_src)
         st.image(img_rgb, caption='Big Picture', use_column_width=True)
         st.write("***")
         
         st.write("### Step 2")
-        template_src = st.file_uploader("Upload an image that looks similar to the hidden objects", type='png')
+        template_src = st.file_uploader("Upload an image that looks similar to the hidden objects", type=['png','jpg','jpeg'])
         if template_src is not None:
             template = Image.open(template_src)
             
             img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
             template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
-            (thresh, template) = cv2.threshold(template, 127, 255, cv2.THRESH_BINARY)
 
             st.image(template, caption='Hidden Object', use_column_width=False)
             height, width = template.shape[::]
@@ -52,19 +51,11 @@ def main():
             st.write("### Step 3")
             threshold = st.slider('Select a value for the threshold', 0.0, 1.0, 0.5)
     
-            st.write(f"Finding objects at {threshold} similarity threshold...")
+            st.write(f"Finding objects at **{threshold}** similarity threshold...")
 
-            # Find rotated hidden objects
-            loc0 = []
-            loc1 = []
-            for rotation_angle in range(0,360):  
-                template = rotate_image(template, rotation_angle)
-                result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED) 
-                loc = np.where(result >= threshold)
-                loc0.extend(loc[0].tolist())
-                loc1.extend(loc[1].tolist())
+            result = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED) 
+            loc = np.where(result >= threshold)
     
-            loc = [np.array(loc0), np.array(loc1)] 
             find_count = len(loc[0])
 
             # We want a colored rectangle on top of the gray image 
@@ -107,4 +98,3 @@ if __name__ == "__main__":
 
 # Reference:
 #https://towardsdatascience.com/object-detection-on-python-using-template-matching-ab4243a0ca62
-#https://stackoverflow.com/questions/9041681/opencv-python-rotate-image-by-x-degrees-around-specific-point
