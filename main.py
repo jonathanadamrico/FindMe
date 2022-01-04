@@ -43,6 +43,7 @@ def main():
             
             img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
             template = cv2.cvtColor(np.array(template), cv2.COLOR_BGR2GRAY)
+            (thresh, template) = cv2.threshold(template, 127, 255, cv2.THRESH_BINARY)
 
             st.image(template, caption='Hidden Object', use_column_width=False)
             height, width = template.shape[::]
